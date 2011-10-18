@@ -35,9 +35,7 @@
   },
   "devDependencies": {
     "should" : ">=0.2.1",    
-    "vows" : ">= 0.5.9",
-    "api-easy" : ">= 0.2.3",
-    "nock" : "*"
+    "vows" : ">= 0.5.9"
   },
   "bugs": { "url": "http://github.com/scottyapp/mongoose-from-json-schema/issues" },
   "licenses": [
