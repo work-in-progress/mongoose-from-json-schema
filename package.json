@@ -1,0 +1,48 @@
+{
+  "author": "Martin Wawrusch <martin@wawrusch.com> (http://martinatsunset.com)",
+  "name": "mongoose-from-json-schema",
+  "description": "Transform a json-schema into a mongoose schema.",
+  "version": "0.0.6",
+  "main" : "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/scottyapp/mongoose-from-json-schema.git"
+  },
+  "bin" : {
+  },
+  "directories" : {
+    "lib" : "./lib",
+    "test" : "./spec"
+  },
+  "keywords" : [
+    "mongoose","json","schema","json-schema"
+  ],
+  "scripts": {
+    "test": "vows --spec spec/*-spec.coffee",
+    "watch" : "coffee -c -w  -o lib src"
+  },
+  "engines": {
+    "node": ">=0.4.8"
+  },
+  "dependencies": {
+    "mongoose": "2.3.x",
+    "mongoose-types" : "1.0.x",
+    "lingo": "0.0.x",
+    "underscore" : "1.2.x",
+    "async" : "0.1.x",
+    "colors" : "~ 0.5",
+    "pkginfo" : "~ 0.2"    
+  },
+  "devDependencies": {
+    "should" : ">=0.2.1",    
+    "vows" : ">= 0.5.9",
+    "api-easy" : ">= 0.2.3",
+    "nock" : "*"
+  },
+  "bugs": { "url": "http://github.com/scottyapp/mongoose-from-json-schema/issues" },
+  "licenses": [
+    { "type": "MIT",
+      "url": "http://github.com/scottyapp/mongoose-from-json-schema/raw/master/LICENSE"
+    }
+  ]
+}

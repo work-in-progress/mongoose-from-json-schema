@@ -1,0 +1,18 @@
+{ code: 200,
+  headers: 
+   { date: 'Wed, 12 Oct 2011 09:52:19 GMT',
+     server: 'Apache-Coyote/1.1',
+     'x-powered-by': 'Servlet 2.4; JBoss-4.0.3SP1 (build: CVSTag=JBoss_4_0_3_SP1 date=200510231054)/Tomcat-5.5',
+     'cache-control': 'max-age=120',
+     expires: 'Wed, 12 Oct 2011 09:54:19 GMT',
+     'x-host': 'lnxp-3732',
+     'x-robots-tag': 'index, follow, noarchive',
+     'content-type': 'text/html;charset=ISO-8859-1',
+     'content-length': '158665',
+     vary: 'Accept-Encoding',
+     age: '85',
+     'x-cache': 'HIT from lnxp-3954.srv.mediaways.net',
+     'x-cache-lookup': 'HIT from lnxp-3954.srv.mediaways.net:81',
+     via: '1.1 www.spiegel.de, 1.0 lnxp-3954.srv.mediaways.net (squid/3.1.4)',
+     connection: 'close' },
+  file: '/Users/mwawrusch/Documents/spiegel.html' }

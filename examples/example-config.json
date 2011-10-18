@@ -1,0 +1,14 @@
+{
+  "downloads" : [
+    {
+      "url" : "http://www.latimes.com",
+      "target" : "/Users/mwawrusch/Documents/spiegel.html" 
+    }  
+  ],
+  
+  "heads" : [
+    {
+      "url" : "http://www.latimes.com" 
+    }  
+  ]
+}

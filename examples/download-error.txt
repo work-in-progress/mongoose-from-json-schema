@@ -1,0 +1,13 @@
+{ stack: [Getter/Setter],
+  arguments: undefined,
+  type: undefined,
+  message: 'HTTP Error: 401',
+  code: 401,
+  headers: 
+   { server: 'Apache',
+     'www-authenticate': 'Basic realm="iTMS Export Area"',
+     'content-length': '401',
+     'keep-alive': 'timeout=5',
+     connection: 'Keep-Alive',
+     'content-type': 'text/html; charset=iso-8859-1',
+     date: 'Wed, 12 Oct 2011 07:54:01 GMT' } }
