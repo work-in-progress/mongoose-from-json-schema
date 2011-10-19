@@ -20,7 +20,6 @@ vows.describe("extended_string")
         return
       "THEN IT SHOULD BE CLEAN :)": () ->
         assert.isTrue true
-          
   .addBatch
     "SETUP" :
       topic: () -> 
@@ -40,5 +39,9 @@ vows.describe("extended_string")
          return
        "THEN it should have been created": (err,newEntity) ->
          assert.isNotNull @ExtendedString
+       "THEN it should have been 4 validators": (err,newEntity) ->
+         #for x in @ExtendedString.schema.path("stringValue").validators
+         #  console.log x           
+         assert.equal @ExtendedString.schema.path("stringValue").validators.length,4
         
   .export module

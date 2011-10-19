@@ -60,32 +60,49 @@ class StringPropertyConverter
   description:
   required:
   default: 
-  
-  
+  textTrimming: null || "trim"
+  textTransform: null || "uppercase" || "lowercase"
   pattern: "" optional, a regex pattern
   minLength: 0 optional, a positive integer
   maxLength: 1000 optional, a positive integer
+
   # Custom Properties
-  textTrimming: null || "trim"
-  textTransform: null || "uppercase" || "lowercase"
   index, unique,sparse
-  ---
-  format: 
   enum: 
   
+  ---
+  format: 
   ###
   convert: (propertySchema) ->
+    pattern = if propertySchema.pattern then new RegExp(propertySchema.pattern) else null
+    validators = []
     
+    if propertySchema.minLength 
+      validators.push (v) -> v.length >= propertySchema.minLength
+
+    if propertySchema.maxLength 
+      validators.push (v) -> v.length <= propertySchema.maxLength
+    
+    # This assumes that we have string values inside the enum, we might
+    # want to check that
+    enums = null
+    if propertySchema.enum && propertySchema.enum.length > 0
+      enums = []
+      enums.push x for x in propertySchema.enum
+      
     res =
       type: String
       title: propertySchema.title || null
       description: propertySchema.description || null 
       required : !!propertySchema.required
       default: propertySchema.default || null
-      
-      lowercase: false
-      uppercase: false
-      trim:false
-      match:null
-      enum: null
+      validate : validators      
+      lowercase: "#{propertySchema.textTransform}".toLowerCase() == "lowercase" 
+      uppercase: "#{propertySchema.textTransform}".toLowerCase() == "uppercase"
+      trim:!!propertySchema.textTrimming      
+      match: pattern
+      enum: enums
+      index : !!propertySchema.uniqueIndex || !!propertySchema.index
+      unique :!!propertySchema.uniqueIndex
+      sparse: !!propertySchema.sparseIndex 
     res
