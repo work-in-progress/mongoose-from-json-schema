@@ -6,6 +6,9 @@ color = require 'colors'
 mongooseTypes = require "mongoose-types"
 _ = require "underscore"
 
+
+require('pkginfo')(module,'version')
+
 ###*
 Encapsulates the primary functionality for this module.
 ###

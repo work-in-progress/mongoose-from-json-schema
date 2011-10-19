@@ -36,6 +36,6 @@ module.exports =
   cleanDatabase : (cb) ->
     databaseCleaner = new DatabaseCleaner('mongodb')
     databaseCleaner.clean mongoose.createConnection(dbUrl).db, (err) ->
-      return cb err if e?
+      return cb(err) if err?
       cb null
         
