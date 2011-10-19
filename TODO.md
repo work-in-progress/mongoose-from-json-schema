@@ -1,5 +1,6 @@
 ## Pre Release
 
+* expose version
 * infliction
 * conditions, validators, stuff
 * Support all other primitive datatypes
