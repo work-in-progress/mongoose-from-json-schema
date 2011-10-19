@@ -43,11 +43,28 @@ class exports.PropertyInfo
     dt = @propertySchema.type.toLowerCase()
     switch dt
        when "string" then new StringPropertyConverter().convert(@propertySchema)
+       when "integer" then new IntegerPropertyConverter().convert(@propertySchema)
        else
         res =
           type : @moongooseDataType()
         res
 
+class IntegerPropertyConverter
+  convert: (propertySchema) ->
+    validators = []
+          
+    res =
+      type: Number
+      title: propertySchema.title || null
+      description: propertySchema.description || null 
+      required : !!propertySchema.required
+      default: propertySchema.default || null
+      validate : validators      
+      index : !!propertySchema.uniqueIndex || !!propertySchema.index
+      unique :!!propertySchema.uniqueIndex
+      sparse: !!propertySchema.sparseIndex 
+    res
+    
 ###*
 A property converter that converts string type.
 ###
