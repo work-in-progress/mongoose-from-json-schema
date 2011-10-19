@@ -24,13 +24,20 @@ npm install mongoose-from-json-schema
 
 ### Coffeescript
 
-	ServerRuntime = require("mongoose-from-json-schema").ServerRuntime
-	hook = new ServerRuntime(name: 'wget')
+	jstm = require("mongoose-from-json-schema")
+	bag = new jstm.JsonSchemaToMongoose()
+	bag.addJsonSchema "MyModelName", {... json schema ...}, (err) ->
+		MyModelName = bag.mongooseModel("MyModelName")
  
 ### Javascript
 
-	var ServerRuntime = require("mongoose-from-json-schema").ServerRuntime;
-	var hook = new ServerRuntime({ name: 'wget' });
+	var bag, jstm;
+	jstm = require("mongoose-from-json-schema");
+	bag = new jstm.JsonSchemaToMongoose();
+	bag.addJsonSchema("MyModelName", {}, function(err) {
+  	var MyModelName;
+  	return MyModelName = bag.mongooseModel("MyModelName");
+	});
 
 ## Advertising :)
 
