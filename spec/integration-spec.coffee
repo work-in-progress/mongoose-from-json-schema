@@ -33,12 +33,12 @@ vows.describe("integration_task")
         @xx.addJsonSchema "hello", {},@callback
         return
       "THEN it should have been added": (err,newEntity) ->
-        assert.isNotNull @xx.schemas['hello']
+        assert.isNotNull @xx.entityInfos['hello']
       "THEN it's jsonName should be set" : (err,newEntity) ->
-        assert.equal @xx.schemas['hello'].jsonName ,"hello"
-      "THEN it's properties count should be 0"  : (err,newEntity) ->
-          assert.equal newEntity.properties.length ,0
+        assert.equal @xx.entityInfos['hello'].jsonName ,"hello"
+      "THEN it's propertyInfos count should be 0"  : (err,newEntity) ->
+          assert.equal newEntity.propertyInfos.length ,0
       "THEN it's originalSchema object should be set"  : (err,newEntity) ->
-          assert.isNotNull @xx.schemas['hello'].originalSchema
+          assert.isNotNull @xx.entityInfos['hello'].originalSchema
       
   .export module

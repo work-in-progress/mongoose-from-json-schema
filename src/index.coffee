@@ -15,7 +15,7 @@ class exports.JsonSchemaToMongoose
   Initializes a new instance of the @see JsonSchemaToMongoose class.
   ###
   constructor: (opts = {}) ->
-    @schemas = {}
+    @entityInfos = {}
     
     
   ###*
@@ -26,12 +26,12 @@ class exports.JsonSchemaToMongoose
     name = @_extractName(name,schema)
     console.log name
     console.log @
-    sc = @schemas[name] = new entityInfo.EntityInfo(name,schema) 
+    sc = @entityInfos[name] = new entityInfo.EntityInfo(name,schema) 
     
     # WIP
     
     _.each (schema.properties || {}), (value,key,list) =>
-      sc.properties.push new propertyInfo.PropertyInfo key,value
+      sc.propertyInfos.push new propertyInfo.PropertyInfo key,value
       
     cb null,sc
     #schema
@@ -42,7 +42,7 @@ class exports.JsonSchemaToMongoose
   ###
   mongooseModel: (name,connection) ->
     schema = @mongooseSchema(name)
-    modelName = @schemas[name].mongooseModelName()
+    modelName = @entityInfos[name].mongooseModelName()
     
     if connection 
       connection.model(modelName,schema) 
@@ -53,7 +53,7 @@ class exports.JsonSchemaToMongoose
   returns a mongoose schema for a previously added json schema.
   ###
   mongooseSchema: (name) ->
-     @schemas[name].mongooseSchema()
+     @entityInfos[name].mongooseSchema()
   
   # super simplistic version for now.
   _extractName: (name,schema) ->

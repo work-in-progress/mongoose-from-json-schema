@@ -9,10 +9,10 @@ class exports.EntityInfo
   jsonName : null
   
   constructor: (@jsonName, @originalSchema) ->
-    @properties = []
+    @propertyInfos = []
 
   property: (name) ->
-    _.select( @properties, (x) -> x.jsonName == name)[0]
+    _.select( @propertyInfos, (x) -> x.jsonName == name)[0]
   
   # Returns the model name to use in mongoose
   mongooseModelName: () ->
@@ -23,7 +23,7 @@ class exports.EntityInfo
   ###
   mongooseSchema: () ->
     def = {}
-    for p in @properties
+    for p in @propertyInfos
       def[p.mongooseName()] =
         type : p.moongooseDataType()
     #console.log "#######"

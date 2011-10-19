@@ -36,11 +36,11 @@ vows.describe("basic_datatypes")
         @xx.addJsonSchema null, json,@callback
         return
       "THEN it should have been added": (err,newEntity) ->
-        assert.isNotNull @xx.schemas['BasicDataTypeTest']
+        assert.isNotNull @xx.entityInfos['BasicDataTypeTest']
       "THEN it's jsonName should be set" : (err,newEntity) ->
-        assert.equal @xx.schemas['BasicDataTypeTest'].jsonName ,"BasicDataTypeTest"
-      "THEN it's properties count should be 5"  : (err,newEntity) ->
-        assert.equal newEntity.properties.length ,5
+        assert.equal @xx.entityInfos['BasicDataTypeTest'].jsonName ,"BasicDataTypeTest"
+      "THEN it's propertyInfos count should be 5"  : (err,newEntity) ->
+        assert.equal newEntity.propertyInfos.length ,5
       "THEN it's string property should return String"  : (err,newEntity) ->
         assert.equal newEntity.property("stringValue").moongooseDataType() ,String
       "THEN it should be able to create a schema"  : (err,newEntity) ->
