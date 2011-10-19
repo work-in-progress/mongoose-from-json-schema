@@ -3,8 +3,16 @@ assert = require 'assert'
 
 main = require '../lib/index'
 specHelper = require './spec_helper'
+specHelper.connectDatabase()
 
 vows.describe("integration_task")
+  .addBatch
+    "CLEANING DATABASE" :
+      topic: () -> 
+        specHelper.cleanDatabase @callback
+        return
+      "THEN IT SHOULD BE CLEAN :)": () ->
+        assert.isTrue true
   .addBatch
     "CLEANUP TEMP":
       topic: () ->

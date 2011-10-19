@@ -37,7 +37,8 @@
     "should" : ">=0.2.1",    
     "vows" : ">= 0.5.9",
     "express" : "~2",
-    "gleak" : ">=0.2.1"
+    "gleak" : ">=0.2.1",
+    "database-cleaner" : ">= 0.5.0"
   },
   "bugs": { "url": "http://github.com/scottyapp/mongoose-from-json-schema/issues" },
   "licenses": [

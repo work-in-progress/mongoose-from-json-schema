@@ -14,6 +14,10 @@ class exports.EntityInfo
   property: (name) ->
     _.select( @properties, (x) -> x.jsonName == name)[0]
   
+  # Returns the model name to use in mongoose
+  mongooseModelName: () ->
+    @jsonName
+    
   ###* 
   @returns a mongoose schema.
   ###

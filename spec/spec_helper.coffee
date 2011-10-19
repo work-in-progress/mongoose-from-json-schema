@@ -1,5 +1,10 @@
 main = require '../lib/index'
 fs = require 'fs'
+mongoose = require 'mongoose'
+DatabaseCleaner = require 'database-cleaner'
+
+dbUrl = 'mongodb://localhost/pts_test' 
+
 
 module.exports = 
     
@@ -21,3 +26,16 @@ module.exports =
   loadJsonFixture: (fixtureName) ->
     data = fs.readFileSync @fixturePath(fixtureName), "utf-8"
     JSON.parse data
+    
+  database : dbUrl
+
+  # Connect to the test database.
+  connectDatabase: () ->
+    mongoose.connect dbUrl
+
+  cleanDatabase : (cb) ->
+    databaseCleaner = new DatabaseCleaner('mongodb')
+    databaseCleaner.clean mongoose.createConnection(dbUrl).db, (err) ->
+      return cb err if e?
+      cb null
+        

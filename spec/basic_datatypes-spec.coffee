@@ -4,6 +4,7 @@ mongoose = require 'mongoose'
 
 main = require '../lib/index'
 specHelper = require './spec_helper'
+specHelper.connectDatabase()
 
 vows.describe("basic_datatypes")
   .addBatch
@@ -11,7 +12,15 @@ vows.describe("basic_datatypes")
       topic: () ->
         specHelper.cleanTmpFiles []
       "THEN IT SHOULD BE CLEAN :)": () ->
-        assert.isTrue true        
+        assert.isTrue true      
+  .addBatch
+    "CLEANING DATABASE" :
+      topic: () -> 
+        specHelper.cleanDatabase @callback
+        return
+      "THEN IT SHOULD BE CLEAN :)": () ->
+        assert.isTrue true
+          
   .addBatch
     "SETUP" :
       topic: () -> 
@@ -27,9 +36,9 @@ vows.describe("basic_datatypes")
         @xx.addJsonSchema null, json,@callback
         return
       "THEN it should have been added": (err,newEntity) ->
-        assert.isNotNull @xx.schemas['BasicDatatypes']
+        assert.isNotNull @xx.schemas['BasicDataTypeTest']
       "THEN it's jsonName should be set" : (err,newEntity) ->
-        assert.equal @xx.schemas['BasicDatatypes'].jsonName ,"BasicDatatypes"
+        assert.equal @xx.schemas['BasicDataTypeTest'].jsonName ,"BasicDataTypeTest"
       "THEN it's properties count should be 5"  : (err,newEntity) ->
         assert.equal newEntity.properties.length ,5
       "THEN it's string property should return String"  : (err,newEntity) ->
@@ -39,5 +48,19 @@ vows.describe("basic_datatypes")
       "THEN that schema needs to have a stringValue member"  : (err,newEntity) ->
         #console.log newEntity.mongooseSchema().path('stringValue')
         assert.equal newEntity.mongooseSchema().path('stringValue').path,"stringValue"
+      "THEN the schema should be found through the main entry point": (err,newEntity) ->
+        assert.isNotNull @xx.mongooseSchema("BasicDataTypeTest")
+  .addBatch
+     "WHEN retrieving a model for the previously created schema" :
+       topic: () -> 
+         @xx =  new main.JsonSchemaToMongoose()
+         json = specHelper.loadJsonFixture "basic_datatypes.json"
+         @xx.addJsonSchema null, json, (err,newEntity)=>
+            @BasicDataTypeTest = @xx.mongooseModel("BasicDataTypeTest")
+            @callback(err,newEntity)
+         
+         return
+       "THEN it should have been created": (err,newEntity) ->
+         assert.isNotNull @BasicDataTypeTest
         
   .export module

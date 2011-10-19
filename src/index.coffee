@@ -40,13 +40,20 @@ class exports.JsonSchemaToMongoose
   returns a model against the current database connection, or mongoose 
   itself if none is set.
   ###
-  model: (name) ->
+  mongooseModel: (name,connection) ->
+    schema = @mongooseSchema(name)
+    modelName = @schemas[name].mongooseModelName()
     
+    if connection 
+      connection.model(modelName,schema) 
+    else 
+      mongoose.model(modelName,schema)
+      
   ###*
   returns a mongoose schema for a previously added json schema.
   ###
-  schema: (name) ->
-  
+  mongooseSchema: (name) ->
+     @schemas[name].mongooseSchema()
   
   # super simplistic version for now.
   _extractName: (name,schema) ->
