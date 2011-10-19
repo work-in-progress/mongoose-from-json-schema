@@ -1,0 +1,23 @@
+{
+   "name" : "ExtendedString",
+   "description":"A string def with all the bells and whistles",
+   "type":"object",
+   "properties":{
+      "stringValue":{
+        "type":"string",
+        "title" : "ext. string",
+        "description":"A string value",
+        "required" : true,
+        "default": "Lindsay",
+        "pattern": "[\\w]*",
+        "minLength": 2,
+        "maxLength": 1000,
+        "textTrimming": "trim",
+        "textTransform" : "uppercase",
+        "index" : true,
+        "uniqueIndex" : true,
+        "sparseIndex" : true,
+        "enum": ["Lindsay","Ashley","Rihanna"]
+      }
+   }
+}
