@@ -39,8 +39,8 @@ vows.describe("basic_datatypes")
         assert.isNotNull @xx.entityInfos['BasicDataTypeTest']
       "THEN it's jsonName should be set" : (err,newEntity) ->
         assert.equal @xx.entityInfos['BasicDataTypeTest'].jsonName ,"BasicDataTypeTest"
-      "THEN it's propertyInfos count should be 5"  : (err,newEntity) ->
-        assert.equal newEntity.propertyInfos.length ,5
+      "THEN it's propertyInfos count should be 4"  : (err,newEntity) ->
+        assert.equal newEntity.propertyInfos.length ,4
       "THEN it's string property should return String"  : (err,newEntity) ->
         assert.equal newEntity.property("stringValue").moongooseDataType() ,String
       "THEN it should be able to create a schema"  : (err,newEntity) ->
@@ -48,6 +48,13 @@ vows.describe("basic_datatypes")
       "THEN that schema needs to have a stringValue member"  : (err,newEntity) ->
         #console.log newEntity.mongooseSchema().path('stringValue')
         assert.equal newEntity.mongooseSchema().path('stringValue').path,"stringValue"
+      "THEN that schema needs to have a integerValue member"  : (err,newEntity) ->
+        assert.equal newEntity.mongooseSchema().path('integerValue').path,"integerValue"
+      "THEN that schema needs to have a booleanValue member"  : (err,newEntity) ->
+        assert.equal newEntity.mongooseSchema().path('booleanValue').path,"booleanValue"
+      "THEN that schema needs to have a numberValue member"  : (err,newEntity) ->
+        assert.equal newEntity.mongooseSchema().path('numberValue').path,"numberValue"
+
       "THEN the schema should be found through the main entry point": (err,newEntity) ->
         assert.isNotNull @xx.mongooseSchema("BasicDataTypeTest")
   .addBatch

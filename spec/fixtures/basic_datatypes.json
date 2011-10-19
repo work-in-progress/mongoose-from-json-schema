@@ -7,19 +7,14 @@
          "description":"A string value",
          "type":"string"
       },
-      "imageValue":{
-         "format":"image",
-         "type":"string"
+      "numberValue":{
+         "type":"number"
       },
-      "dateValue":{
-         "type":"string",
-         "format":"date"
+      "booleanValue":{
+         "type":"boolean"
       },
-      "intValue":{
+      "integerValue":{
          "type":"integer"
-      },
-      "role":{
-         "type":"string"
       }
    }
 }
