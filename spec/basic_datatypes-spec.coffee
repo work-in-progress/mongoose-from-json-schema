@@ -1,5 +1,6 @@
 vows = require 'vows'
 assert = require 'assert'
+mongoose = require 'mongoose'
 
 main = require '../lib/index'
 specHelper = require './spec_helper'
@@ -30,8 +31,13 @@ vows.describe("basic_datatypes")
       "THEN it's jsonName should be set" : (err,newEntity) ->
         assert.equal @xx.schemas['BasicDatatypes'].jsonName ,"BasicDatatypes"
       "THEN it's properties count should be 5"  : (err,newEntity) ->
-          assert.equal newEntity.properties.length ,5
+        assert.equal newEntity.properties.length ,5
       "THEN it's string property should return String"  : (err,newEntity) ->
-          assert.equal newEntity.property("stringValue").moongooseDataType() ,String
-      
+        assert.equal newEntity.property("stringValue").moongooseDataType() ,String
+      "THEN it should be able to create a schema"  : (err,newEntity) ->
+        assert.instanceOf newEntity.mongooseSchema(),mongoose.Schema
+      "THEN that schema needs to have a stringValue member"  : (err,newEntity) ->
+        #console.log newEntity.mongooseSchema().path('stringValue')
+        assert.equal newEntity.mongooseSchema().path('stringValue').path,"stringValue"
+        
   .export module

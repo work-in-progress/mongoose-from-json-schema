@@ -9,6 +9,11 @@ class exports.PropertyInfo
   
   constructor: (@jsonName,@propertySchema) ->
   
+  ###* 
+  @returns the name to be used within mongoose
+  ###
+  mongooseName: () ->
+    @jsonName
   
   ###*
   Analyses the schema and returns the mongoose data type
@@ -18,7 +23,7 @@ class exports.PropertyInfo
     switch dt
       when "string" then String
       when "number" then Number
-      when "integer" then Integer
+      when "integer" then Number # AKA pain and suffering
       when "boolean" then Boolean
       else
         null

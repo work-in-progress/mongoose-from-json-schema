@@ -16,7 +16,7 @@
          "format":"date"
       },
       "intValue":{
-         "type":"int"
+         "type":"integer"
       },
       "role":{
          "type":"string"

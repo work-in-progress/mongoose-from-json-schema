@@ -1,4 +1,5 @@
 
+mongoose = require 'mongoose'
 _ = require "underscore"
 
 ###*
@@ -12,4 +13,18 @@ class exports.EntityInfo
 
   property: (name) ->
     _.select( @properties, (x) -> x.jsonName == name)[0]
+  
+  ###* 
+  @returns a mongoose schema.
+  ###
+  mongooseSchema: () ->
+    def = {}
+    for p in @properties
+      def[p.mongooseName()] =
+        type : p.moongooseDataType()
+    #console.log "#######"
+    #console.log def
+    #console.log "#######"
     
+    ms = new mongoose.Schema(def)
+    ms
