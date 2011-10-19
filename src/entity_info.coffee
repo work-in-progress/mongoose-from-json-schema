@@ -24,8 +24,7 @@ class exports.EntityInfo
   mongooseSchema: () ->
     def = {}
     for p in @propertyInfos
-      def[p.mongooseName()] =
-        type : p.moongooseDataType()
+      def[p.mongooseName()] = p.mongooseSchemaDefinition()
     #console.log "#######"
     #console.log def
     #console.log "#######"

@@ -45,6 +45,12 @@ vows.describe("basic_datatypes")
         assert.equal newEntity.property("stringValue").moongooseDataType() ,String
       "THEN it should be able to create a schema"  : (err,newEntity) ->
         assert.instanceOf newEntity.mongooseSchema(),mongoose.Schema
+      "THEN each property should be mongoose compatible"  : (err,newEntity) ->
+        for p in newEntity.propertyInfos
+          assert.isTrue p.isMongooseCompatible()
+      "THEN each property should export a mongoose definition"  : (err,newEntity) ->
+        for p in newEntity.propertyInfos
+          assert.isNotNull p.mongooseSchemaDefinition()        
       "THEN that schema needs to have a stringValue member"  : (err,newEntity) ->
         #console.log newEntity.mongooseSchema().path('stringValue')
         assert.equal newEntity.mongooseSchema().path('stringValue').path,"stringValue"

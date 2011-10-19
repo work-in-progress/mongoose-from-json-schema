@@ -27,3 +27,20 @@ class exports.PropertyInfo
       when "boolean" then Boolean
       else
         null
+        
+  ###*
+  Checks if this property is actually compatible with 
+  mongoose. For now returns true when the data type checks out.
+  ###
+  isMongooseCompatible: () ->
+    @moongooseDataType() != null
+  
+  ###* 
+  Creates a mongoose schema definition from this property info.
+  This is where some of the magic happens.
+  ###
+  mongooseSchemaDefinition: () ->
+    res =
+      type : @moongooseDataType()
+    
+    res

@@ -1,8 +1,11 @@
 ## Pre Release
 
-* Support all primitive datatypes
 * infliction
+* conditions, validators, stuff
+* Support all other primitive datatypes
 * embedded documents
-* resolve a schema correctly
+* arrays
+* generic objects
+* resolve a schema correctly (use existing loaders)
 * resolver object/cb 
 
