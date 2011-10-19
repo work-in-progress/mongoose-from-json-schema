@@ -1,4 +1,5 @@
 {
+   "name" : "Card",
    "description":"A representation of a person, company, organization, or place",
    "type":"object",
    "properties":{

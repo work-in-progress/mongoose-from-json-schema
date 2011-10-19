@@ -4,7 +4,7 @@ assert = require 'assert'
 main = require '../lib/index'
 specHelper = require './spec_helper'
 
-vows.describe("integration_task")
+vows.describe("basic_datatypes")
   .addBatch
     "CLEANUP TEMP":
       topic: () ->
@@ -22,15 +22,16 @@ vows.describe("integration_task")
     "WHEN adding a json schema" :
       topic: () -> 
         @xx =  new main.JsonSchemaToMongoose()
-        @xx.addJsonSchema "hello", {},@callback
+        json = specHelper.loadJsonFixture "basic_datatypes.json"
+        @xx.addJsonSchema null, json,@callback
         return
       "THEN it should have been added": (err,newEntity) ->
-        assert.isNotNull @xx.schemas['hello']
+        assert.isNotNull @xx.schemas['BasicDatatypes']
       "THEN it's jsonName should be set" : (err,newEntity) ->
-        assert.equal @xx.schemas['hello'].jsonName ,"hello"
-      "THEN it's properties count should be 0"  : (err,newEntity) ->
-          assert.equal newEntity.properties.length ,0
-      "THEN it's originalSchema object should be set"  : (err,newEntity) ->
-          assert.isNotNull @xx.schemas['hello'].originalSchema
+        assert.equal @xx.schemas['BasicDatatypes'].jsonName ,"BasicDatatypes"
+      "THEN it's properties count should be 5"  : (err,newEntity) ->
+          assert.equal newEntity.properties.length ,5
+      "THEN it's string property should return String"  : (err,newEntity) ->
+          assert.equal newEntity.property("stringValue").moongooseDataType() ,String
       
   .export module

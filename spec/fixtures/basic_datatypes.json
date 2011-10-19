@@ -1,0 +1,25 @@
+{
+   "name" : "BasicDatatypes",
+   "description":"A basic schema",
+   "type":"object",
+   "properties":{
+      "stringValue":{
+         "description":"A string value",
+         "type":"string"
+      },
+      "imageValue":{
+         "format":"image",
+         "type":"string"
+      },
+      "dateValue":{
+         "type":"string",
+         "format":"date"
+      },
+      "intValue":{
+         "type":"int"
+      },
+      "role":{
+         "type":"string"
+      }
+   }
+}

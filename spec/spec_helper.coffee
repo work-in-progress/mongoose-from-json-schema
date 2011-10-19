@@ -1,4 +1,5 @@
 main = require '../lib/index'
+fs = require 'fs'
 
 module.exports = 
     
@@ -17,3 +18,6 @@ module.exports =
         fs.unlinkSync @tmpPath(file)
       catch ignore
 
+  loadJsonFixture: (fixtureName) ->
+    data = fs.readFileSync @fixturePath(fixtureName), "utf-8"
+    JSON.parse data
