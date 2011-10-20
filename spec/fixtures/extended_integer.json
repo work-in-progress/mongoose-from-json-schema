@@ -1,0 +1,22 @@
+{
+   "name" : "ExtendedInteger",
+   "description":"An integer with all the bells and whistles",
+   "type":"object",
+   "properties":{
+      "integerValue":{
+        "type":"integer",
+        "title" : "ext. integer",
+        "description":"An integer value",
+        "required" : true,
+        "default": 4,
+        "minimum": 2,
+        "maximum": 1000,
+        "exclusiveMinimum" : false,
+        "exclusiveMaximum" : true,
+        "index" : true,
+        "uniqueIndex" : true,
+        "sparseIndex" : true,
+        "enum": [4,7,15]
+      }    
+   }
+}

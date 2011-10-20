@@ -44,17 +44,18 @@ class exports.PropertyInfo
     switch dt
        when "string" then new StringPropertyConverter().convert(@propertySchema)
        when "integer" then new IntegerPropertyConverter().convert(@propertySchema)
+       when "boolean" then new BooleanPropertyConverter().convert(@propertySchema)
        else
         res =
           type : @moongooseDataType()
         res
 
-class IntegerPropertyConverter
+class BooleanPropertyConverter
   convert: (propertySchema) ->
     validators = []
-          
+
     res =
-      type: Number
+      type: Boolean
       title: propertySchema.title || null
       description: propertySchema.description || null 
       required : !!propertySchema.required
@@ -63,6 +64,39 @@ class IntegerPropertyConverter
       index : !!propertySchema.uniqueIndex || !!propertySchema.index
       unique :!!propertySchema.uniqueIndex
       sparse: !!propertySchema.sparseIndex 
+    res
+
+class IntegerPropertyConverter
+  convert: (propertySchema) ->
+    validators = []
+    
+    if propertySchema.exclusiveMinimum && !!propertySchema.minimum
+      validators.push (v) -> v > propertySchema.minimum
+
+    if propertySchema.exclusiveMaximum && !!propertySchema.maximum
+      validators.push (v) -> v > propertySchema.maximum
+          
+    # This assumes that we have string values inside the enum, we might
+    # want to check that
+    enums = null
+    if propertySchema.enum && propertySchema.enum.length > 0
+      enums = []
+      enums.push x for x in propertySchema.enum
+
+
+    res =
+      type: Number
+      title: propertySchema.title || null
+      description: propertySchema.description || null 
+      required : !!propertySchema.required
+      default: propertySchema.default || null
+      validate : validators      
+      enum : enums
+      index : !!propertySchema.uniqueIndex || !!propertySchema.index
+      unique :!!propertySchema.uniqueIndex
+      sparse: !!propertySchema.sparseIndex 
+      min:  if !propertySchema.exclusiveMinimum && !!propertySchema.minimum then propertySchema.minimum else null 
+      max:  if !propertySchema.exclusiveMaximum && !!propertySchema.maximum then propertySchema.maximum else null 
     res
     
 ###*
